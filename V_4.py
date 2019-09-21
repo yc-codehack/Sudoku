@@ -1,6 +1,7 @@
 import tkinter as tk 
 import random
 
+sol = []
 # global root
 def main_window():
     mw = tk.Tk()
@@ -10,21 +11,30 @@ def main_window():
     easy = 35
     medium = 50
     hard = 65
-    b1 = tk.Button(mw,text='Easy',font = ('arial 20 bold'), height = 3, width = 25, command = lambda: create(easy))
+    b1 = tk.Button(mw,text='Easy',font = ('arial 20 bold'), height = 3, width = 25, command = lambda: make(easy))
     b1.grid(row=0,column=0)
 
-    b2 = tk.Button(mw,text='Medium',font = ('arial 20 bold'), height = 3, width = 25, command = lambda: create(medium))
+    b2 = tk.Button(mw,text='Medium',font = ('arial 20 bold'), height = 3, width = 25, command = lambda: make(medium))
     b2.grid(row=1,column=0)
 
-    b3 = tk.Button(mw,text='Hard',font = ('arial 20 bold'), height = 3, width = 25, command = lambda: create(hard))
+    b3 = tk.Button(mw,text='Hard',font = ('arial 20 bold'), height = 3, width = 25, command = lambda: make(hard))
     b3.grid(row=3,column=0)
+
+    b4 = tk.Button(mw,text='Exit',font = ('arial 20 bold'), height = 3, width = 25, command = lambda: mw.destroy())
+    b4.grid(row=4,column=0)
 
     # b4 = tk.Button(mw,text='Exit',font = ('arial 20 bold'), height = 3, width = 25, command = lambda: exit_1())
     # b4.grid(row=4,column=0)
 
+    def make(easy):
+        create(easy)
+        mw.destroy()
 
     mw.mainloop()
 
+
+def mw_exit():
+    mw.destroy()
 
 def create(easy):
     root.update()
@@ -35,6 +45,7 @@ def create(easy):
         num = random.choice(numbers)
         # f_00.delete(0,'end')
         f_00.insert(0,num)
+        sol.append(num)
         # f_00.config(state="readonly")
         fn_01()
 
@@ -46,6 +57,7 @@ def create(easy):
         if(st_01.get() == st_00.get()):
             fn_01()
         else:
+            sol.append(num)
             # f_01.delete(0,'end')
             # f_01.insert(0,num)
             fn_02()
@@ -57,6 +69,7 @@ def create(easy):
         if(st_02.get()==st_00.get() or st_02.get()==st_01.get()):
             fn_02()
         else:
+            sol.append(num)
             # f_02.delete(0,'end')
             # f_02.insert(0,num)
             fn_03()
@@ -68,6 +81,7 @@ def create(easy):
         if(st_03.get()==st_00.get() or st_03.get()==st_01.get() or st_03.get()==st_02.get()):
             fn_03()
         else:
+            sol.append(num)
             # f_03.delete(0,'end')
             # f_03.insert(0,num)
             fn_04()
@@ -79,6 +93,7 @@ def create(easy):
         if(st_04.get()==st_00.get() or st_04.get()==st_01.get() or st_04.get()==st_02.get() or st_04.get()==st_03.get()):
             fn_04()
         else:
+            sol.append(num)
             # f_04.delete(0,'end')
             # f_04.insert(0,num)
             fn_05()
@@ -90,6 +105,7 @@ def create(easy):
         if(st_05.get()==st_00.get() or st_05.get()==st_01.get() or st_05.get()==st_02.get() or st_05.get()==st_03.get() or st_05.get()==st_04.get()):
             fn_05()
         else:
+            sol.append(num)
             # f_05.delete(0,'end')
             # f_05.insert(0,num)
             fn_06()
@@ -101,6 +117,7 @@ def create(easy):
         if(st_06.get()==st_00.get() or st_06.get()==st_01.get() or st_06.get()==st_02.get() or st_06.get()==st_03.get() or st_06.get()==st_04.get() or st_06.get()==st_05.get()):
             fn_06()
         else:
+            sol.append(num)
             # f_06.delete(0,'end')
             # f_06.insert(0,num)
             fn_07()
@@ -112,6 +129,7 @@ def create(easy):
         if(st_07.get()==st_00.get() or st_07.get()==st_01.get() or st_07.get()==st_02.get() or st_07.get()==st_03.get() or st_07.get()==st_04.get() or st_07.get()==st_05.get() or st_07.get()==st_06.get()):
             fn_07()
         else:
+            sol.append(num)
             # f_07.delete(0,'end')
             # f_07.insert(0,num)
             fn_08()
@@ -123,6 +141,7 @@ def create(easy):
         if(st_08.get()==st_00.get() or st_08.get()==st_01.get() or st_08.get()==st_02.get() or st_08.get()==st_03.get() or st_08.get()==st_04.get() or st_08.get()==st_05.get() or st_08.get()==st_06.get() or st_08.get()==st_07.get()):
             fn_08()
         else:
+            sol.append(num)
             # f_08.delete(0,'end')
             # f_08.insert(0,num)
             row_1()
@@ -566,11 +585,385 @@ def re_blank():
         i.delete(0,'end')
 
 
+def solve():
+    s_cell = [f_00,f_01,f_02,f_03,f_04,f_05,f_06,f_07,f_08]
+    for i in range(7):
+        s_cell[i].delete(0,'end')
+        s_cell[i].insert(0,sol[i])
+
+    def row_del():
+         # Row 1
+        # values shift by 3 from row 0
+        f_10.delete(0,'end')
+        f_11.delete(0,'end')
+        f_12.delete(0,'end')
+
+        f_13.delete(0,'end')
+        f_14.delete(0,'end')
+        f_15.delete(0,'end')
+
+        f_16.delete(0,'end')
+        f_17.delete(0,'end')
+        f_18.delete(0,'end')
+
+
+        # Row 2
+        # values shift by 3 from row 1
+        f_20.delete(0,'end')
+        f_21.delete(0,'end')
+        f_22.delete(0,'end')
+
+        f_23.delete(0,'end')
+        f_24.delete(0,'end')
+        f_25.delete(0,'end')
+
+        f_26.delete(0,'end')
+        f_27.delete(0,'end')
+        f_28.delete(0,'end')
+
+
+        # Row 3
+        # values shift by 1 from row 2
+        f_30.delete(0,'end')
+        f_31.delete(0,'end')
+        f_32.delete(0,'end')
+
+        f_33.delete(0,'end')
+        f_34.delete(0,'end')
+        f_35.delete(0,'end')
+
+        f_36.delete(0,'end')
+        f_37.delete(0,'end')
+        f_38.delete(0,'end')
+
+
+        # Row 4
+        # values shift by 3 from row 3
+        f_40.delete(0,'end')
+        f_41.delete(0,'end')
+        f_42.delete(0,'end')
+
+        f_43.delete(0,'end')
+        f_44.delete(0,'end')
+        f_45.delete(0,'end')
+
+        f_46.delete(0,'end')
+        f_47.delete(0,'end')
+        f_48.delete(0,'end')
+
+
+        # Row 5
+        # values shift by 3 from row 4
+        f_50.delete(0,'end')
+        f_51.delete(0,'end')
+        f_52.delete(0,'end')
+
+        f_53.delete(0,'end')
+        f_54.delete(0,'end')
+        f_55.delete(0,'end')
+
+        f_56.delete(0,'end')
+        f_57.delete(0,'end')
+        f_58.delete(0,'end')
+
+
+        # Row 6
+        # values shift by 1 from row 5
+        f_60.delete(0,'end')
+        f_61.delete(0,'end')
+        f_62.delete(0,'end')
+
+        f_63.delete(0,'end')
+        f_64.delete(0,'end')
+        f_65.delete(0,'end')
+
+        f_66.delete(0,'end')
+        f_67.delete(0,'end')
+        f_68.delete(0,'end')
+
+        # Row 7
+        # values shift by 3 from row 6
+        f_70.delete(0,'end')
+        f_71.delete(0,'end')
+        f_72.delete(0,'end')
+
+        f_73.delete(0,'end')
+        f_74.delete(0,'end')
+        f_75.delete(0,'end')
+
+        f_76.delete(0,'end')
+        f_77.delete(0,'end')
+        f_78.delete(0,'end')
+
+
+        # Row 8
+        # values shift by 3 from row 7
+        f_80.delete(0,'end')
+        f_81.delete(0,'end')
+        f_82.delete(0,'end')
+
+        f_83.delete(0,'end')
+        f_84.delete(0,'end')
+        f_85.delete(0,'end')
+
+        f_86.delete(0,'end')
+        f_87.delete(0,'end')
+        f_88.delete(0,'end')
+
+        row_1()
+    def row_1():
+        # Row 1
+        # values shift by 3 from row 0
+        f_10.insert(0,st_03.get())
+        f_11.insert(0,st_04.get())
+        f_12.insert(0,st_05.get())
+
+        f_13.insert(0,st_06.get())
+        f_14.insert(0,st_07.get())
+        f_15.insert(0,st_08.get())
+
+        f_16.insert(0,st_00.get())
+        f_17.insert(0,st_01.get())
+        f_18.insert(0,st_02.get())
+
+
+        # Row 2
+        # values shift by 3 from row 1
+        f_20.insert(0,st_13.get())
+        f_21.insert(0,st_14.get())
+        f_22.insert(0,st_15.get())
+
+        f_23.insert(0,st_16.get())
+        f_24.insert(0,st_17.get())
+        f_25.insert(0,st_18.get())
+
+        f_26.insert(0,st_10.get())
+        f_27.insert(0,st_11.get())
+        f_28.insert(0,st_12.get())
+
+
+        # Row 3
+        # values shift by 1 from row 2
+        f_30.insert(0,st_21.get())
+        f_31.insert(0,st_22.get())
+        f_32.insert(0,st_23.get())
+
+        f_33.insert(0,st_24.get())
+        f_34.insert(0,st_25.get())
+        f_35.insert(0,st_26.get())
+
+        f_36.insert(0,st_27.get())
+        f_37.insert(0,st_28.get())
+        f_38.insert(0,st_20.get())
+
+
+        # Row 4
+        # values shift by 3 from row 3
+        f_40.insert(0,st_33.get())
+        f_41.insert(0,st_34.get())
+        f_42.insert(0,st_35.get())
+
+        f_43.insert(0,st_36.get())
+        f_44.insert(0,st_37.get())
+        f_45.insert(0,st_38.get())
+
+        f_46.insert(0,st_30.get())
+        f_47.insert(0,st_31.get())
+        f_48.insert(0,st_32.get())
+
+
+        # Row 5
+        # values shift by 3 from row 4
+        f_50.insert(0,st_43.get())
+        f_51.insert(0,st_44.get())
+        f_52.insert(0,st_45.get())
+
+        f_53.insert(0,st_46.get())
+        f_54.insert(0,st_47.get())
+        f_55.insert(0,st_48.get())
+
+        f_56.insert(0,st_40.get())
+        f_57.insert(0,st_41.get())
+        f_58.insert(0,st_42.get())
+
+
+        # Row 6
+        # values shift by 1 from row 5
+        f_60.insert(0,st_51.get())
+        f_61.insert(0,st_52.get())
+        f_62.insert(0,st_53.get())
+
+        f_63.insert(0,st_54.get())
+        f_64.insert(0,st_55.get())
+        f_65.insert(0,st_56.get())
+
+        f_66.insert(0,st_57.get())
+        f_67.insert(0,st_58.get())
+        f_68.insert(0,st_50.get())
+
+        # Row 7
+        # values shift by 3 from row 6
+        f_70.insert(0,st_63.get())
+        f_71.insert(0,st_64.get())
+        f_72.insert(0,st_65.get())
+
+        f_73.insert(0,st_66.get())
+        f_74.insert(0,st_67.get())
+        f_75.insert(0,st_68.get())
+
+        f_76.insert(0,st_60.get())
+        f_77.insert(0,st_61.get())
+        f_78.insert(0,st_62.get())
+
+
+        # Row 8
+        # values shift by 3 from row 7
+        f_80.insert(0,st_73.get())
+        f_81.insert(0,st_74.get())
+        f_82.insert(0,st_75.get())
+
+        f_83.insert(0,st_76.get())
+        f_84.insert(0,st_77.get())
+        f_85.insert(0,st_78.get())
+
+        f_86.insert(0,st_70.get())
+        f_87.insert(0,st_71.get())
+        f_88.insert(0,st_72.get())
+
+    row_del()
+    '''def s_00():
+        if(st_00.get()==''):
+            def do():
+                num = random.choice(numbers)
+                f_00.delete(0,'end')
+                f_00.insert(0,num)
+                if(st_00.get()==st_01.get() or st_00.get()==st_02.get() or st_00.get()==st_10.get() or st_00.get()==st_11.get() or st_00.get()==st_12.get() or st_00.get()==st_20.get() or st_00.get()==st_21.get() or st_00.get()==st_22.get() or st_00.get()==st_03.get() or st_00.get()==st_04.get() or st_00.get()==st_05.get() or st_00.get()==st_06.get() or st_00.get()==st_07.get() or st_00.get()==st_08.get() or st_00.get()==st_10.get() or st_00.get()==st_20.get() or st_00.get()==st_30.get() or st_00.get()==st_40.get() or st_00.get()==st_50.get() or st_00.get()==st_60.get() or st_00.get()==st_70.get() or st_00.get()==st_80.get()):
+                    do()
+                else:
+                    s_01()
+            do()
+        else:
+            s_01()
+    
+    def s_01():
+        if(st_01.get()==''):
+            def do():
+                num = random.choice(numbers)
+                f_01.delete(0,'end')
+                f_01.insert(0,num)
+                if(st_01.get==st_00.get() or st_01.get()==st_02.get() or st_01.get()==st_10.get() or st_01.get()==st_11.get() or st_01.get()==st_12.get() or st_01.get()==st_20.get() or st_01.get()==st_21.get() or st_01.get()==st_22.get() or st_01.get()==st_02.get() or st_01.get()==st_03.get() or st_01.get()==st_04.get() or st_01.get()==st_05.get() or st_01.get()==st_06.get() or st_01.get()==st_07.get() or st_01.get()==st_08.get() or st_01.get()==st_11.get() or st_01.get()==st_21.get() or st_01.get()==st_31.get() or st_01.get()==st_41.get() or st_01.get()==st_51.get() or st_01.get()==st_61.get() or st_01.get()==st_71.get() or st_01.get()==st_81.get()):
+                    do()
+                else:
+                    s_02()
+            do()
+        else:
+            s_02()
+
+    def s_02():
+        if(st_02.get()==''):
+            def do():
+                num = random.choice(numbers)
+                f_02.delete(0,'end')
+                f_02.insert(0,num)
+                if(st_02.get()==st_00.get() or st_02.get()==st_01.get() or st_02.get()==st_10.get() or st_02.get()==st_11.get() or st_02.get()==st_12.get() or st_02.get()==st_20.get() or st_02.get()==st_21.get() or st_02.get()==st_22.get() or st_02.get()==st_03.get or st_02.get()==st_04.get or st_02.get()==st_05.get or st_02.get()==st_06.get or st_02.get()==st_07.get or st_02.get()==st_08.get or st_02.get()==st_12.get or st_02.get()==st_22.get or st_02.get()==st_32.get or st_02.get()==st_42.get or st_02.get()==st_52.get or st_02.get()==st_62.get or st_02.get()==st_72.get or st_02.get()==st_82.get):
+                    do()
+                else:
+                    s_03()
+            do()
+        else:
+            s_03()
+
+    def s_03():
+        if(st_03.get()==''):
+            def do():
+                num = random.choice(numbers)
+                f_03.delete(0,'end')
+                f_03.insert(0,num)
+                if(st_03.get()==st_00.get() or st_03.get()==st_01.get() or st_03.get()==st_02.get() or st_03.get()==st_04.get() or st_03.get()==st_05.get() or st_03.get()==st_13.get() or st_03.get()==st_14.get() or st_03.get()==st_15.get() or st_03.get()==st_23.get() or st_03.get()==st_24.get() or st_03.get()==st_25.get() or st_03.get()==st_06.get() or st_03.get()==st_07.get() or st_03.get()==st_08.get() or st_03.get()==st_33.get() or st_03.get()==st_43.get() or st_03.get()==st_53.get() or st_03.get()==st_63.get() or st_03.get()==st_73.get() or st_03.get()==st_83.get()):
+                    do()
+                else:
+                    s_04()
+            do()
+        else:
+            s_04()
+    
+    def s_04():
+        if(st_04.get()==''):
+            def do():
+                num = random.choice(numbers)
+                f_04.delete(0,'end')
+                f_04.insert(0,num)
+                if(st_04.get()==st_00.get() or st_04.get()==st_01.get() or st_04.get()==st_02.get() or st_04.get()==st_03.get() or st_04.get()==st_05.get() or st_04.get()==st_13.get() or st_04.get()==st_14.get() or st_04.get()==st_15.get() or st_04.get()==st_23.get() or st_04.get()==st_24.get() or st_04.get()==st_25.get() or st_04.get()==st_06.get() or st_04.get()==st_07.get() or st_04.get()==st_08.get() or st_04.get()==st_34.get() or st_04.get()==st_44.get() or st_04.get()==st_54.get() or st_04.get()==st_64.get() or st_04.get()==st_74.get() or st_04.get()==st_84.get()):
+                    do()
+                else:
+                    s_05()
+            do() 
+        else:
+            s_05()
+
+    def s_05():
+        if(st_05.get()==''):
+            def do():
+                num = random.choice(numbers)
+                f_05.delete(0,'end')
+                f_05.insert(0,num)
+                if(st_05.get()==st_00.get() or st_05.get()==st_01.get() or st_05.get()==st_02.get() or st_05.get()==st_03.get() or st_05.get()==st_04.get() or st_05.get()==st_13.get() or st_05.get()==st_14.get() or st_05.get()==st_15.get() or st_05.get()==st_23.get() or st_05.get()==st_24.get() or st_05.get()==st_25.get() or st_05.get()==st_06.get() or st_05.get()==st_07.get() or st_05.get()==st_08.get() or st_05.get()==st_35.get() or st_05.get()==st_45.get() or st_05.get()==st_55.get() or st_05.get()==st_65.get() or st_05.get()==st_75.get() or st_05.get()==st_85.get()):
+                    do()
+                else:
+                    s_06()
+            do() 
+        else:
+            s_06()
+
+    def s_06():
+        if(st_06.get()==''):
+            def do():
+                num = random.choice(numbers)
+                f_06.delete(0,'end')
+                f_06.insert(0,num)
+                if(st_06.get()==st_00.get() or st_06.get()==st_01.get() or st_06.get()==st_02.get() or st_06.get()==st_03.get() or st_06.get()==st_04.get() or st_06.get()==st_05.get() or st_06.get()==st_07.get() or st_06.get()==st_08.get() or st_06.get()==st_16.get() or st_06.get()==st_17.get() or st_06.get()==st_18.get() or st_06.get()==st_26.get() or st_06.get()==st_27.get() or st_06.get()==st_28.get() or st_06.get()==st_36.get() or st_06.get()==st_46.get() or st_06.get()==st_56.get() or st_06.get()==st_66.get() or st_06.get()==st_76.get() or st_06.get()==st_86.get()):
+                    do()
+                else:
+                    s_06()
+            do() 
+        else:
+            s_06()
+
+    def s_07():
+        if(st_07.get()==''):
+            def do():
+                num = random.choice(numbers)
+                f_07.delete(0,'end')
+                f_07.insert(0,num)
+                if(st_07.get()==st_00.get() or st_07.get()==st_01.get() or st_07.get()==st_02.get() or st_07.get()==st_03.get() or st_07.get()==st_04.get() or st_07.get()==st_05.get() or st_07.get()==st_06.get() or st_07.get()==st_08.get() or st_07.get()==st_16.get() or st_07.get()==st_17.get() or st_07.get()==st_18.get() or st_07.get()==st_26.get() or st_07.get()==st_27.get() or st_07.get()==st_28.get()) or st_07.get()==st_37.get() or st_07.get()==st_47.get() or st_07.get()==st_57.get() or st_07.get()==st_67.get() or st_07.get()==st_77.get() or st_07.get()==st_87.get():                                 
+                    do()
+                else:
+                    pass
+            do() 
+        else:
+            pass
+
+    def s_08():
+        if(st_08.get()==''):
+            def do():
+                num = random.choice(numbers)
+                f_08.delete(0,'end')
+                f_08.insert(0,num)
+                if(st_08.get()==st_00.get() or st_08.get()==st_01.get() or st_08.get()==st_02.get() or st_08.get()==st_03.get() or st_08.get()==st_04.get() or st_08.get()==st_05.get() or st_08.get()==st_06.get() or st_08.get()==st_07.get() or st_08.get()==st_16.get() or st_08.get()==st_17.get() or st_08.get()==st_18.get() or st_08.get()==st_26.get() or st_08.get()==st_27.get() or st_08.get()==st_28.get() or st_08.get()==st_38.get() or st_08.get()==st_48.get() or st_08.get()==st_58.get() or st_08.get()==st_68.get() or st_08.get()==st_78.get() or st_08.get()==st_88.get()):
+                    do()
+                else:
+                    pass
+            do() 
+        else:
+            pass
+
+    s_00()'''
+            
 # def gui():
 
 root = tk.Tk()
 root.title('Sudoko')
-root.geometry('443x550+923+0')
+root.geometry('443x600+923+0')
 root.withdraw()
 
 numbers = [1,2,3,4,5,6,7,8,9]
@@ -1009,6 +1402,8 @@ but_1.grid(row = 9, column = 0, columnspan = 5,padx=0)
 but_2 = tk.Button(text = 'Clear', font = ('arial 10 bold'), height = 2, width = 54, command = lambda: re_blank())
 but_2.grid(row = 10, column = 0, columnspan = 5,padx=0)
 
+but_3 = tk.Button(text = 'Solve', font = ('arial 10 bold'), height = 2, width = 54, command = lambda: solve())
+but_3.grid(row=11,column=0,columnspan=5,padx=0)
 
 # cell list
 cell = [f_00,f_01,f_02,f_03,f_04,f_05,f_06,f_07,f_08,f_10,f_11,f_12,f_13,f_14,f_15,f_16,f_17,f_18,f_20,f_21,f_22,f_23,f_24,f_25,f_26,f_27,f_28,f_30,f_31,f_32,f_33,f_34,f_35,f_36,f_37,f_38,f_40,f_41,f_42,f_43,f_44,f_45,f_46,f_47,f_48,f_50,f_51,f_52,f_53,f_54,f_55,f_56,f_57,f_58,f_60,f_61,f_62,f_63,f_64,f_65,f_66,f_67,f_68,f_70,f_71,f_72,f_73,f_74,f_75,f_76,f_77,f_78,f_80,f_81,f_82,f_83,f_84,f_85,f_86,f_87,f_88]
